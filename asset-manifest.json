@@ -1,9 +1,11 @@
 {
   "files": {
-    "main.css": "/smartmirror_adam_web/static/css/main.d649cdd5.css",
-    "main.js": "/smartmirror_adam_web/static/js/main.e5644836.js",
+    "main.css": "/smartmirror_adam_web/static/css/main.d8efa6b4.css",
+    "main.js": "/smartmirror_adam_web/static/js/main.05cce5ac.js",
     "static/js/453.73806fb6.chunk.js": "/smartmirror_adam_web/static/js/453.73806fb6.chunk.js",
-    "static/media/smart_thumbnail.gif": "/smartmirror_adam_web/static/media/smart_thumbnail.b0e640f989a486c6664d.gif",
+    "static/media/onoz.jpg": "/smartmirror_adam_web/static/media/onoz.fc5e1d056e0e136f21ce.jpg",
+    "static/media/sm_training.png": "/smartmirror_adam_web/static/media/sm_training.959abf8227a379547461.png",
+    "static/media/smart_thumbnail.png": "/smartmirror_adam_web/static/media/smart_thumbnail.d811d4ba4f821b76cbe0.png",
     "static/media/joystickguide_play.png": "/smartmirror_adam_web/static/media/joystickguide_play.122a8ac44b3823d62c20.png",
     "static/media/joystickguide_login.png": "/smartmirror_adam_web/static/media/joystickguide_login.e0c110488983cb5089a2.png",
     "static/media/joystickguide_normal.png": "/smartmirror_adam_web/static/media/joystickguide_normal.b8d76588e5fbb9f6b11e.png",
@@ -11,15 +13,13 @@
     "static/media/joystickguide_searching.png": "/smartmirror_adam_web/static/media/joystickguide_searching.5742ab1c3a3a43986ac5.png",
     "static/media/logo-adam.png": "/smartmirror_adam_web/static/media/logo-adam.eac00cdde69fdd886a86.png",
     "static/media/Wrong time, right place.ttf": "/smartmirror_adam_web/static/media/Wrong time, right place.54294581063a3829ee3d.ttf",
-    "static/media/sm_training.jpg": "/smartmirror_adam_web/static/media/sm_training.33e250a9214d29c3ad6c.jpg",
-    "static/media/onoz.jpg": "/smartmirror_adam_web/static/media/onoz.c936ed6cccb38788babf.jpg",
     "index.html": "/smartmirror_adam_web/index.html",
-    "main.d649cdd5.css.map": "/smartmirror_adam_web/static/css/main.d649cdd5.css.map",
-    "main.e5644836.js.map": "/smartmirror_adam_web/static/js/main.e5644836.js.map",
+    "main.d8efa6b4.css.map": "/smartmirror_adam_web/static/css/main.d8efa6b4.css.map",
+    "main.05cce5ac.js.map": "/smartmirror_adam_web/static/js/main.05cce5ac.js.map",
     "453.73806fb6.chunk.js.map": "/smartmirror_adam_web/static/js/453.73806fb6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d649cdd5.css",
-    "static/js/main.e5644836.js"
+    "static/css/main.d8efa6b4.css",
+    "static/js/main.05cce5ac.js"
   ]
 }

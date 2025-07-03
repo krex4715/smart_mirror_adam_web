@@ -1,5 +1,5 @@
 {
-  "name": "adam-project-practice",
+  "name": "smartmirror_adam_web",
   "version": "0.1.0",
   "description": "ADAM Dance Project",
   "author": {
@@ -8,7 +8,7 @@
   },
   "private": true,
   "main": "public/electron.js",
-  "homepage": ".",
+  "homepage": "https://krex4715.github.io/smartmirror_adam_web",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@heroicons/react": "^2.2.0",
@@ -81,6 +81,19 @@
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
   },
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "concurrently": "^9.1.2",
+    "cra-bundle-analyzer": "^0.1.1",
+    "cross-env": "^7.0.3",
+    "electron": "^35.0.1",
+    "electron-builder": "^25.1.8",
+    "electron-rebuild": "^3.2.9",
+    "gh-pages": "^6.3.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "wait-on": "^8.0.3"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -98,17 +111,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.18",
-    "concurrently": "^9.1.2",
-    "cra-bundle-analyzer": "^0.1.1",
-    "electron": "^35.0.1",
-    "electron-builder": "^25.1.8",
-    "electron-rebuild": "^3.2.9",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "wait-on": "^8.0.3"
   },
   "jest": {
     "roots": [
@@ -171,6 +173,9 @@
     "play": "electron .",
     "react-start": "react-scripts start",
     "build": "react-scripts build",
+    "build:web": "cross-env REACT_APP_TARGET=web node scripts/build.js",
+    "predeploy": "npm run build:web",
+    "deploy": "gh-pages -d build",
     "build:osx": "build --mac",
     "electron-build": "electron-builder",
     "build:linux": "npm run build:linux32 && npm run build:linux64",
@@ -180,7 +185,7 @@
     "build:win32": "build --win --ia32",
     "build:win64": "build --win --x64",
     "deploy:mac": "electron-builder --mac",
-    "deploy": "electron-builder --linux deb --x64"
+    "deploy:linux": "electron-builder --linux deb --x64"
   },
   "build": {
     "appId": "com.smartmirror.app",

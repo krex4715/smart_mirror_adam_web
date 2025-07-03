@@ -1,0 +1,49 @@
+/* src/styles/index.css */
+
+/* ---------- Tailwind 기본 지시어 ---------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- 커스텀 폰트 ---------- */
+@font-face {
+  font-family: "MainFont_Regular";
+  font-weight: normal;
+  src: url("../assets/fonts/Wrong time, right place.ttf") format("truetype");
+}
+
+/* ---------- 전역 설정 ---------- */
+html,
+body {
+  background: #000 !important;
+  font-size: 24px;          /* 1rem = 24px */
+  cursor: default;          /* 기본 커서 보임 */
+  user-select: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* === 커서 자동 숨김용 클래스 === */
+body.cursor-hidden,
+html.cursor-hidden,
+body.cursor-hidden *,
+html.cursor-hidden * {
+  cursor: none !important;  /* 어디서든 최우선으로 커서 숨김 */
+}
+
+/* 스크롤바 완전 제거 (웹킷) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- 비디오 요소 ---------- */
+video {
+  /* iOS 사파리 기본 컨트롤 숨김 */
+  .custom-video::-webkit-media-controls-play-button,
+  .custom-video::-webkit-media-controls-volume-slider {
+    display: none !important;
+  }
+
+  pointer-events: none;
+  user-select: none;
+}

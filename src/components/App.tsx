@@ -8,71 +8,71 @@ import {
 } from "react-router-dom";
 
 /* ---------- 페이지 ---------- */
-import Home        from "../pages/Home/Home";
-import Main        from "../pages/Main/Main";
+import Home  from "../pages/Home/Home";
+import Main  from "../pages/Main/Main";
 
+/* ---------- MODE 진입 ---------- */
+import Mode_group     from "../pages/Mode/Mode_group";
+import Mode_onoz_kpop from "../pages/Mode/Mode_onoz_kpop";
+import Mode_ai_prac   from "../pages/Mode/Mode_ai_prac";
+import Mode_sm        from "../pages/Mode/Mode_sm";
 
-import Mode_group       from "../pages/Mode/Mode_group";
+/* ---------- PLAYER ---------- */
+import PlayMode_onoz_kpop  from "../pages/Player/PlayMode_onoz_kpop";
+import PlayMode_ai_prac    from "../pages/Player/PlayMode_ai_prac";
 
+/* 👉 스마트미러 : 셀렉터 ⇢ 트레이닝 / 촬영 */
+import PlayMode_sm_selector  from "../pages/Player/PlayMode_sm_selector";
+import PlayMode_sm_training  from "../pages/Player/sm/PlayMode_sm_training";
+import PlayMode_sm_record    from "../pages/Player/sm/PlayMode_sm_record";
 
-import Mode_onoz_kpop       from "../pages/Mode/Mode_onoz_kpop";
-import PlayMode_onoz_kpop   from "../pages/Player/PlayMode_onoz_kpop";
-
-import Mode_ai_prac       from "../pages/Mode/Mode_ai_prac";
-import PlayMode_ai_prac   from "../pages/Player/PlayMode_ai_prac"; 
-
-import Mode_sm_training       from "../pages/Mode/Mode_sm_training";
-import PlayMode_sm_training   from "../pages/Player/PlayMode_sm_trainig";
-
-
-import Info        from "../pages/Info/Info";
-import Loading     from "../pages/Loading/Loading";
-
-
-
+/* ---------- 기타 ---------- */
+import Info    from "../pages/Info/Info";
+import Loading from "../pages/Loading/Loading";
 
 /* ---------- 전역 상태 / 라이브러리 ---------- */
 import { pb }               from "../lib/pb";
 import { SessionProvider }  from "../lib/SessionContext";
 
 /* ---------- 공통 UI ---------- */
-import RemainClock     from "../components/RemainClock";  // ⏳ 남은 시간 + 블루투스 + 로그아웃
-import AutoHideCursor  from "../components/AutoHideCursor"; // 🖱️ 커서 자동 숨김
-import SupportQrs      from "../components/SupportQrs";   // 📌 문의·FAQ + 사용가이드 QR
-import JoystickGuide   from "../components/JoystickGuide"; // 조이스틱 가이드
-
-
+import MirrorStatusBar   from "./MirrorStatusBar";
+import AutoHideCursor from "../components/AutoHideCursor";
+import SupportQrs     from "../components/SupportQrs";
+import JoystickGuide  from "../components/JoystickGuide";
 
 /* ---------- 보호 라우트 래퍼 ---------- */
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) =>
   pb.authStore.isValid ? children : <Navigate to="/" replace />;
 
-/* ---------- 인증 이후 라우트 묶음 ---------- */
+/* ---------- 인증 이후 라우트 ---------- */
 const ProtectedRoutes: React.FC = () => (
   <RequireAuth>
     <Routes>
-      <Route path="/main"             element={<Main />} />
+      {/* 메인 대시보드 */}
+      <Route path="/main" element={<Main />} />
 
+      {/* ───── AI 연습 모드 ───── */}
       <Route path="/mode_ai_prac"            element={<Mode_ai_prac />} />
       <Route path="/player/mode_ai_prac/:id" element={<PlayMode_ai_prac />} />
-      
-      <Route path="/mode_sm_training"        element={<Mode_sm_training />} /> 
-      <Route path="/player/mode_sm_training/:id" element={<PlayMode_sm_training />} />
 
+      {/* ───── 스마트미러 모드 ───── */}
+      <Route path="/mode_sm" element={<Mode_sm />} />
 
-      
+      {/* 선택 → 트레이닝 / 촬영 */}
+      <Route path="/player/sm/:id"   element={<PlayMode_sm_selector />} />
+      <Route path="/sm_training/:id" element={<PlayMode_sm_training />} />
+      <Route path="/sm_record/:id"   element={<PlayMode_sm_record />} />
+
+      {/* ───── ONOZ K-POP 모드 ───── */}
       <Route path="/mode_onoz_kpop"            element={<Mode_onoz_kpop />} />
       <Route path="/player/mode_onoz_kpop/:id" element={<PlayMode_onoz_kpop />} />
 
+      {/* ───── 기타 ───── */}
+      <Route path="/video/info/:id" element={<Info />} />
+      <Route path="/loading/:id"    element={<Loading />} />
+      <Route path="/mode_group"     element={<Mode_group />} />
 
-      <Route path="/video/info/:id"   element={<Info />} />
-      <Route path="/loading/:id"      element={<Loading />} />
-      
-      <Route path="/mode_group"           element={<Mode_group />} />
-
-      {/* 그 외 모든 경로는 404 */}
-
-      {/* 인증 상태에서 "/" 접근 시 자동으로 /main */}
+      {/* 인증 상태에서 "/" → /main */}
       <Route path="/" element={<Navigate to="/main" replace />} />
     </Routes>
   </RequireAuth>
@@ -82,13 +82,13 @@ const ProtectedRoutes: React.FC = () => (
 const App: React.FC = () => (
   <HashRouter>
     <SessionProvider>
-      {/* ── 항상 표시되는 전역 HUD ─────────────────────── */}
-      <RemainClock />                     {/* ⏳ 남은 시간 + 블루투스 + 로그아웃 */}
-      <AutoHideCursor timeout={1500} />   {/* 🖱️ 1.5초 후 커서 자동 숨김 */}
-      <SupportQrs />                      {/* 📄 문의·FAQ + 사용가이드 QR */}
-      <JoystickGuide />                   {/* 조이스틱 가이드 */}
+      {/* ── 항상 표시되는 전역 HUD ── */}
+      <MirrorStatusBar />
+      <AutoHideCursor timeout={1500} />
+      <SupportQrs />
+      <JoystickGuide />
 
-      {/* ── 라우팅 ───────────────────────────────────── */}
+      {/* ── 라우팅 ── */}
       <Routes>
         {/* 로그인(비인증) */}
         <Route path="/" element={<Home />} />

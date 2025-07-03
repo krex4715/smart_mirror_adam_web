@@ -8,12 +8,12 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PocketBase from "pocketbase";
 
-import spinner         from "../../assets/images/spinner.gif";
-import JoystickGuide   from "../../components/JoystickGuide";
-import NavMenu         from "../../components/NavMenu";
+import spinner         from "../../../assets/images/spinner.gif";
+import JoystickGuide   from "../../../components/JoystickGuide";
+import NavMenu         from "../../../components/NavMenu";
 
-import { parseNavItems, NavItem }      from "../../utils/parseNavItems";
-import { parseSections, SectionPoint } from "../../utils/parseSections";
+import { parseNavItems, NavItem }      from "../../../utils/parseNavItems";
+import { parseSections, SectionPoint } from "../../../utils/parseSections";
 
 /* PocketBase */
 const BASE_URL = "https://ai-dam-smartmirror-pb-floral-lake-8577.fly.dev";

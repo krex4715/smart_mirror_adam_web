@@ -1,4 +1,3 @@
-// src/components/RemainClock.tsx
 import React from "react";
 import {
   ArrowRightOnRectangleIcon,
@@ -7,13 +6,13 @@ import {
 import { useSession } from "../lib/SessionContext";
 
 const RemainClock: React.FC = () => {
-  const { remaining, handleLogout, userName } = useSession();
+  const { remaining, tickets, handleLogout, userName } = useSession();
   if (remaining <= 0) return null;
 
-  /* 🔽 소수점 오차 제거 (반올림이나 버림 아무 쪽이나 OK) */
-  const sec = Math.floor(remaining);          // ← 핵심
-  const mm  = Math.floor(sec / 60);
-  const ss  = String(sec % 60).padStart(2, "0");
+  /* 🔽 소수점 오차 제거 */
+  const sec = Math.floor(remaining);
+  const mm = Math.floor(sec / 60);
+  const ss = String(sec % 60).padStart(2, "0");
 
   return (
     <div className="fixed top-4 left-0 right-0 z-50 px-6 flex justify-between items-center pointer-events-none">
@@ -23,11 +22,18 @@ const RemainClock: React.FC = () => {
       </span>
 
       {/* ── 오른쪽 HUD ── */}
-      <div className="pointer-events-auto flex items-center gap-6
-                      px-6 py-1 rounded-full backdrop-blur-sm bg-black/70">
+      <div className="pointer-events-auto flex items-center gap-6 px-6 py-1 rounded-full backdrop-blur-sm bg-black/70">
+        {/* 남은 시간 */}
         <span className="font-semibold text-white text-4xl">
           ⏳ {mm}:{ss}
         </span>
+
+        {/* 남은 콘텐츠권 */}
+        {tickets > 0 && (
+          <span className="font-semibold text-white text-4xl">
+            🎟️ {tickets}
+          </span>
+        )}
 
         {/* 블루투스 */}
         <button

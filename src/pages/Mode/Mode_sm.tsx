@@ -1,3 +1,9 @@
+/*  src/pages/Mode/Mode_sm.tsx
+ *  스마트미러 전용 섹션(grid) 선택 화면
+ *  - 카드 클릭 / Enter → /player/:id     (PlayMode_sm_selector)
+ *  - selector 내부에서 ‘트레이닝’ or ‘촬영’ 분기
+ *  ------------------------------------------------------------ */
+
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PocketBase from "pocketbase";
@@ -5,14 +11,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 /* ───────── PocketBase ───────── */
 const BASE_URL = "https://ai-dam-smartmirror-pb-floral-lake-8577.fly.dev";
-const pb       = new PocketBase(BASE_URL);
+const pb = new PocketBase(BASE_URL);
 
 /* 섹션 목록 불러오기 */
 const fetchSections = async () => {
   try {
-    const recs = await pb
-      .collection("video_sections")
-      .getFullList({ sort: "-updated" });
+    const recs = await pb.collection("video_sections").getFullList({ sort: "-updated" });
 
     return recs.map((r: any) => ({
       id: r.id,
@@ -32,27 +36,27 @@ const fetchSections = async () => {
 
 /* 선택 카드 → 화면 세로 중앙 */
 const centerVertically = (el: HTMLElement) => {
-  const rect   = el.getBoundingClientRect();
+  const rect = el.getBoundingClientRect();
   const offset = rect.top - (window.innerHeight - rect.height) / 2;
   window.scrollBy({ top: offset, behavior: "smooth" });          // Y축
   el.scrollIntoView({ behavior: "smooth", inline: "center" });   // X축
 };
 
 /* ───────── 컴포넌트 ───────── */
-const Mode_sm_training: React.FC = () => {
+const Mode_sm: React.FC = () => {
   const navigate = useNavigate();
 
   const [sections, setSections] = useState<any[]>([]);
-  const [idx, setIdx]           = useState(0);
+  const [idx, setIdx]           = useState(0);    // 0‥sections.length (마지막 = ‘돌아가기’)
   const [back, setBack]         = useState(false);
   const [flash, setFlash]       = useState(false);
 
-  const numCols = 4;
+  const numCols = 4;                              // 키보드 ↓↑ 이동 간격
   const refs    = useRef<(HTMLDivElement | null)[]>([]);
 
   /* 초기 로드 */
   useEffect(() => {
-    localStorage.setItem("lastVisitedPage", "mode_sm_training");
+    localStorage.setItem("lastVisitedPage", "mode_sm");
     (async () => {
       const data = await fetchSections();
       setSections(data);
@@ -72,48 +76,42 @@ const Mode_sm_training: React.FC = () => {
         return;
       }
       if (e.key === "i" || e.key === "ㅑ") {
-        window.scrollBy({ top: window.innerHeight * 0.1, behavior: "smooth" });
+        window.scrollBy({ top:  window.innerHeight * 0.1, behavior: "smooth" });
         return;
       }
 
-      const max = sections.length;
+      const max = sections.length;                // ‘돌아가기’ 인덱스 = max
       const nextIdx = (v: number) =>
         setIdx((p) => (p + v + max + 1) % (max + 1));
 
       switch (e.key) {
         case "ArrowRight":
-        case "f":
-        case "ㄹ":
+        case "f": case "ㄹ":
           nextIdx(1);
           break;
         case "ArrowLeft":
-        case "e":
-        case "ㄷ":
+        case "e": case "ㄷ":
           nextIdx(-1);
           break;
         case "ArrowDown":
-        case "d":
-        case "ㅇ":
-          if (idx + numCols < max) nextIdx(numCols);
+        case "d": case "ㅇ":
+          if (idx + numCols <= max) nextIdx(numCols);
           break;
         case "ArrowUp":
-        case "c":
-        case "ㅊ":
-          if (idx - numCols >= 0) nextIdx(-numCols);
+        case "c": case "ㅊ":
+          if (idx - numCols >= 0)     nextIdx(-numCols);
           break;
         case "Enter":
-        case "g":
-        case "ㅎ":
-          if (idx === max) {
+        case "g": case "ㅎ":
+          if (idx === max) {                   // ‘돌아가기’
             setBack(true);
             setTimeout(() => navigate(-1), 300);
-          } else {
-            navigate(`/player/mode_sm_training/${sections[idx].id}`);
+          } else {                             // 섹션 선택 → selector
+            navigate(`/player/sm/${sections[idx].id}`);
           }
           break;
         case "Escape":
-        case "j":
-        case "ㅓ":
+        case "j": case "ㅓ":
           setBack(true);
           setTimeout(() => navigate(-1), 400);
           break;
@@ -162,13 +160,14 @@ const Mode_sm_training: React.FC = () => {
               animate={{ opacity: 1, scale: idx === i ? 1.08 : 1 }}
               transition={{ delay: i * 0.02 }}
               whileHover={{ scale: 1.05 }}
-              className={`relative p-3 rounded-xl cursor-pointer overflow-hidden shadow-lg transition-colors duration-300
+              className={`relative p-3 rounded-xl cursor-pointer overflow-hidden shadow-lg
+                          transition-colors duration-300
                           ${
                             idx === i
                               ? "bg-[#b777df]/30 border-4 border-purple-300 ring-2 ring-purple-300 shadow-[0_0_25px_8px_rgba(183,119,223,0.45)]"
                               : "bg-[#b777df]/25 border border-transparent hover:border-white/60"
                           }`}
-              onClick={() => navigate(`/player/mode_sm_training/${s.id}`)}
+              onClick={() => navigate(`/player/${s.id}`)}
             >
               <img
                 src={s.thumbnail}
@@ -201,4 +200,4 @@ const Mode_sm_training: React.FC = () => {
   );
 };
 
-export default Mode_sm_training;
+export default Mode_sm;

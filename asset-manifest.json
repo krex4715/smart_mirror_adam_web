@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/smartmirror_adam_web/static/css/main.d649cdd5.css",
+    "main.js": "/smartmirror_adam_web/static/js/main.e5644836.js",
+    "static/js/453.73806fb6.chunk.js": "/smartmirror_adam_web/static/js/453.73806fb6.chunk.js",
+    "static/media/smart_thumbnail.gif": "/smartmirror_adam_web/static/media/smart_thumbnail.b0e640f989a486c6664d.gif",
+    "static/media/joystickguide_play.png": "/smartmirror_adam_web/static/media/joystickguide_play.122a8ac44b3823d62c20.png",
+    "static/media/joystickguide_login.png": "/smartmirror_adam_web/static/media/joystickguide_login.e0c110488983cb5089a2.png",
+    "static/media/joystickguide_normal.png": "/smartmirror_adam_web/static/media/joystickguide_normal.b8d76588e5fbb9f6b11e.png",
+    "static/media/joystickguide_searching_with+.png": "/smartmirror_adam_web/static/media/joystickguide_searching_with+.63b0537b3fc98ec40eba.png",
+    "static/media/joystickguide_searching.png": "/smartmirror_adam_web/static/media/joystickguide_searching.5742ab1c3a3a43986ac5.png",
+    "static/media/logo-adam.png": "/smartmirror_adam_web/static/media/logo-adam.eac00cdde69fdd886a86.png",
+    "static/media/Wrong time, right place.ttf": "/smartmirror_adam_web/static/media/Wrong time, right place.54294581063a3829ee3d.ttf",
+    "static/media/sm_training.jpg": "/smartmirror_adam_web/static/media/sm_training.33e250a9214d29c3ad6c.jpg",
+    "static/media/onoz.jpg": "/smartmirror_adam_web/static/media/onoz.c936ed6cccb38788babf.jpg",
+    "index.html": "/smartmirror_adam_web/index.html",
+    "main.d649cdd5.css.map": "/smartmirror_adam_web/static/css/main.d649cdd5.css.map",
+    "main.e5644836.js.map": "/smartmirror_adam_web/static/js/main.e5644836.js.map",
+    "453.73806fb6.chunk.js.map": "/smartmirror_adam_web/static/js/453.73806fb6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d649cdd5.css",
+    "static/js/main.e5644836.js"
+  ]
+}
